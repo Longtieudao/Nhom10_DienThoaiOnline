@@ -1,0 +1,59 @@
+﻿@model PagedList.IPagedList<Ictshop.Models.Sanpham>
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "Tìm Kiếm Thông Tin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2 style="text-align:center;">Tìm Kiếm Theo Tên Điện Thoại</h2>
+@using (Html.BeginForm("Search", "TimKiem", FormMethod.Get))
+{
+
+    <p style="text-align:center;">
+
+        Tìm sản phẩm : @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+
+}
+
+@{
+    if (Model != null)
+    {
+
+        <table class="table">
+
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tensp)
+                    </td>
+
+                    <td>
+                        <img src=@Url.Content("~" +item.Anhbia.ToString()) style="width:50px;" />
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hedieuhanh.Tenhdh)
+                    </td>
+
+                    <td>
+
+
+                        <button class="btn btn-sm btn-warning"><i class="fa fa-info-circle" aria-hidden="true"><a href="@Url.Action("xemchitiet","Sanpham", new { @Masp = item.Masp })">Xem Chi Tiết  </a></i></button>&nbsp
+                    </td>
+                </tr>
+            }
+
+
+        </table>
+    }
+    <div class="pagination-container">
+        @Html.PagedListPager(Model, page => Url.Action("Search", new { page, searchString = Request.QueryString["searchString"] }))
+    </div>
+
+}

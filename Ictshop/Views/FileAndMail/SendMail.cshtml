@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Liên Hệ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+<br />
+<div style="text-align:center;">
+    <h3>Thông tin liên hệ</h3>
+
+    <address>
+        Tên :
+        Nguyễn Ngọc Qúy
+        <br />
+        <abbr title="Phone">Điện thoại:</abbr>
+        0336605307
+    </address>
+
+    <address>
+        <strong>Email:</strong>   <a href="mailto:2124802010091@student.tdmu.edu.vn">2124802010091@student.tdmu.edu.vn</a><br />
+    </address>
+</div>
+
+
+
+
+
+
+<h2 style="text-align:center;">Gửi Mail Đến Admin</h2>
+
+
+<div class="form-horizontal">
+
+    <div>
+        <form action="~/FileAndMail/SendMail" name="SendMail" method="post" enctype="multipart/form-data">
+            <div>Nhập email của bạn</div>
+            <input type="email" name="From" required />
+            <div>Nhập email của Admin</div>
+            <input type="email" name="To" required />
+            <div>Nhập lý do </div>
+            <input type="text" name="Subject" />
+            <div>Nhập chi tiết </div>
+            <textarea name="Notes" rows=4></textarea>
+            <div>Gửi hình minh chứng </div>
+            <input type="file" name="Attachments" value="Choose file" style="text-align:center;" />
+            <hr />
+            <input type="submit" value="Xác nhận gửi" />
+        </form>
+    </div>
+
+</div>
+

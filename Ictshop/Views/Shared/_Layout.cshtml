@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Điện thoại</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel=" stylesheet" href="~/Content/Style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    @using Ictshop.Models
+
+    <style type="text/css">
+        body {
+            background-color: #F0F0F0;
+        }
+
+        .navbar-inverse {
+            background-color: #39B54A;
+            border-color: #39B54A;
+        }
+
+        .top_header {
+            background-color: black;
+            padding-left: 110px;
+            color: white;
+        }
+
+        .form-inline {
+            float: right;
+            padding-top: 10px;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: white;
+            font-size: x-large;
+        }
+
+        .navbar-inverse .navbar-brand {
+            color: white;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: white;
+            font-size: large;
+        }
+
+            .navbar-inverse .navbar-nav > li > a:hover {
+                color: black;
+            }
+
+        .navbar-brand {
+            color: cadetblue;
+        }
+
+        .spnoibat {
+            background-color: white;
+        }
+
+            .spnoibat h3 {
+                padding-left: 30px;
+            }
+
+        .giohang {
+            color: white;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+
+    @{ var u = Session["use"] as Ictshop.Models.Nguoidung; }
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="top_header col-md-12">
+
+            <div class="row">
+                
+                <div class="col-sm-4 col-md-0" style="font-size:large">@Html.ActionLink(" DienThoaiOnline", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</div>
+
+                
+                @*@Html.Action("GioHangPartial", "GioHang",new { @style = "color:while" })*@
+                @{ if (u != null)
+                    {
+                                <div class="col-sm-4 col-md-0">
+                                    <a style="color:white" href="@Url.Action("Profile", "User", new { id = u.MaNguoiDung })"> Xin chào : @u.Hoten</a>
+                                    &nbsp;
+                                    @*@Html.ActionLink("ĐĂNG XUẤT", "DangXuat", "User", new { style = "color:red" })*@
+                                    <a style="color:red" href="/User/DangXuat"> ĐĂNG XUẤT</a>
+                                </div> }
+                     }
+
+
+            </div>
+
+        </div>
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+              
+               
+
+            </div>
+
+            <div class="navbar-collapse collapse">
+
+                <ul class="nav navbar-nav">
+
+                    <li class="dropdown">
+                        <a href="@Url.Action("Index", "Home")" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">ĐIỆN THOẠI<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li>@Html.Action("DanhmucPartial", "DanhMuc")</li>
+
+                          
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("SendMail", "FileAndMail")">LIÊN HỆ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("About", "Home")">GIỚI THIỆU</a>
+                    </li>
+                    <li>
+                        @{ if (u != null)
+                            {
+                                <a style="color:white"
+                                   class="nav-link"
+                                   href="@Url.Action("Index", "DonHangs")">ĐƠN HÀNG</a>
+                              }
+                            }
+
+                            </li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a
+                           href="@Url.Action("Search", "TimKiem")">TÌM KIẾM</a>
+                    </li>
+                    @{ if (u == null)
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">TÀI KHOẢN<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="~/User/DangKy"><span class="glyphicon glyphicon-user"></span> Đăng ký</a> </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="~/User/DangNhap"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a></li>
+                                </ul>
+                            </li>
+                        } }
+                <li>
+                    @{ if (u != null)
+                        {
+                            @Html.Action("GioHangPartial", "GioHang", new { @class = "giohang" })
+                        }
+                        }
+
+                        </li>
+
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <br>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />   
+        <br />
+    </div>
+    <footer class="container well" align="center">
+        
+        @Html.Action("Menu", "DanhMuc")
+    </footer>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

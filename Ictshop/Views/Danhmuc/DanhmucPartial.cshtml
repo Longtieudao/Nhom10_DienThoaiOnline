@@ -1,0 +1,14 @@
+﻿@using Ictshop.Models;
+@model List<Hangsanxuat>
+
+
+
+@foreach (var item in Model)
+{
+    <ul class="list-group">
+
+        <a href="@Url.Action("dttheodanhmuc","Danhmuc",new { iMahang = item.Mahang })" class="list-group-item"> @item.Tenhang</a>
+    </ul>
+        }
+  
+
